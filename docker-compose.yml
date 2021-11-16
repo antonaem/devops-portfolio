@@ -1,0 +1,16 @@
+version: "3"
+networks:
+	my-app-network:
+        external: true
+services:
+    
+    my-app-db:
+        image: postgres:9.6
+        volumes: ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+        ports: 
+            - 5432:5432
+        environment: 
+            - POSTGRES_USER=db-user
+            - POSTGRES_PASSWORD=db-password
+        networks:
+            my-app-network
